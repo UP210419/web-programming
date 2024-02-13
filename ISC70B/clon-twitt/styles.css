@@ -1,4 +1,9 @@
-*{
+:root {
+    --primary-color-grey: #515b69; 
+    --primary-color-grey-50: rgb(81, 91, 105, 0.1);
+}
+
+* {
     background-color: #15202B;
     color: #fff;
 
@@ -7,18 +12,18 @@
     margin: 0;
 }
 
-a{
+a {
     color: rgb(29, 161, 242);
     text-decoration: none;
 }
 
 img,
-svg{
+svg {
     max-width: 100%;
     max-height: auto;
 }
 
-body{
+body {
     border: 1px solid red;
     display: flex;
 
@@ -27,39 +32,97 @@ body{
     align-items: center;
 }
 
-.container-twit{
-    border: solid 1px white;
+.container-twit {
+    border: solid 0.5px;
+    border-color: transparent transparent var(--primary-color-grey) transparent;
     width: 650px;
     height: 400px;
 
     display: grid;
+
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 50px;
+    grid-template-rows: 1fr 40px;
 }
 
-.container-body{
+.container-twit * {
+    background-color: transparent;
+}
+
+.container-twit:hover {
+    background-color: var(--primary-color-grey-50);
+    transition-duration: 0.5s;
+    border-radius: 10px;
+}
+
+.container-body {
     grid-column: 1/2;
     grid-row: 1/2;
 
     display: grid;
-    grid-template-columns: 50px 1fr;
+    grid-template-columns: 75px 1fr;
 }
 
-.textGrey{
-    color: #515b69;
+.container-avatar img {
+    width: 75%;
+    border-radius: 50%;
+    margin: 10px;
 }
 
-.container-icons{
+.container-twit-body 
+.header 
+p {
+    padding: 5px 0px;
+}
+
+.container-twit
+.body {
+    display: flex;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-twit-body
+.body
+img {
+    width: 95%;
+    border-radius: 20px;
+    border: solid 0.5px var(--primary-color-grey); 
+}
+
+.textGrey {
+    color: var(--primary-color-grey);
+}
+
+.container-icons {
     grid-column: 1/2;
     grid-row: 2/3;
+
     display: flex;
+
     justify-content: space-around;
 }
 
-.icon{
-    border: solid 2px whitesmoke;
-    width: 60px;
+.container-icons:first-child {
+    background-color: red;
 }
-.icon > svg{
+
+.icon {
+    /*border: solid 2px white;*/
+    width: 40px;
+    height: 30px;
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+.icon svg, 
+.icon span {
+    color: var(--primary-color-grey);
+    fill: var(--primary-color-grey);
+}
+
+.icon > svg {
     width: 60%;
 }
