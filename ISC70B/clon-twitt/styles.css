@@ -1,6 +1,14 @@
 :root {
     --primary-color-grey: #515b69; 
-    --primary-color-grey-50: rgb(81, 91, 105, 0.1);
+    --primary-color-grey-50: rgba(81, 91, 105, 0.1);
+    --color-icon-comentario: rgb(29, 161, 242);
+    --color-icon-comentario-50: rgba(29, 161, 242, 0.4); 
+    --color-icon-retwit: rgb(24, 176, 95);
+    --color-icon-retwit-50: rgba(24, 176, 95, 0.4);
+    --color-icon-like: rgb(224, 36, 94); 
+    --color-icon-like-50: rgba(224, 36, 94, 0.4); 
+    --color-icon-compartir: rgb(30, 148, 221);
+    --color-icon-compartir-50: rgba(30, 148, 221, 0.4); 
 }
 
 * {
@@ -10,6 +18,7 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 a {
@@ -103,13 +112,9 @@ img {
     justify-content: space-around;
 }
 
-.container-icons:first-child {
-    background-color: red;
-}
-
 .icon {
     /*border: solid 2px white;*/
-    width: 40px;
+    width: 45px;
     height: 30px;
     display: flex;
 
@@ -124,5 +129,83 @@ img {
 }
 
 .icon > svg {
-    width: 60%;
+    border-radius: 50%;
+    width: 80%;
+    padding: 5px;
+    margin-right: 2.5px;
 }
+
+.icon span {
+    font-size: small;
+}
+
+.container-icons .icon:nth-child(1):hover svg,
+.container-icons .icon:nth-child(1):hover span {
+    transition-duration: 0.3s;
+}
+
+.container-icons .icon:nth-child(1):hover svg {
+    background-color: var(--color-icon-comentario-50);
+    border-radius: 50%;
+    fill: var(--color-icon-comentario);
+}
+
+.container-icons .icon:nth-child(1):hover span {
+    color: var(--color-icon-comentario);
+}
+
+.container-icons .icon:nth-child(2):hover svg,
+.container-icons .icon:nth-child(2):hover span {
+    transition-duration: 0.3s;
+}
+
+.container-icons .icon:nth-child(2):hover svg {
+    background-color: var(--color-icon-retwit-50);
+    border-radius: 50%;
+    fill: var(--color-icon-retwit);
+}
+
+.container-icons .icon:nth-child(2):hover span {
+    color: var(--color-icon-retwit);
+}
+
+.container-icons .icon:nth-child(3):hover svg,
+.container-icons .icon:nth-child(3):hover span {
+    transition-duration: 0.3s;
+}
+
+.container-icons .icon:nth-child(3):hover svg {
+    background-color: var(--color-icon-like-50);
+    border-radius: 50%;
+    fill: var(--color-icon-like);
+}
+
+.container-icons .icon:nth-child(3):hover span {
+    color: var(--color-icon-like);
+}
+
+/*
+.container-icons .icon:nth-child(4):hover svg,
+.container-icons .icon:nth-child(4):hover span {
+    transition-duration: 0.3s;
+}
+
+.container-icons .icon:nth-child(4):hover svg {
+    background-color: var(--color-icon-compartir-50);
+    border-radius: 50%;
+    fill: var(--color-icon-compartir);
+}
+
+.container-icons .icon:nth-child(4):hover span {
+    color: var(--color-icon-compartir);
+}
+*/
+
+.container-icons .icon:nth-child(4):hover svg {
+    border-radius: 50%;
+    background-color: var(--color-icon-compartir-50);
+    fill: var(--color-icon-compartir);
+    transition-duration: 0.3s;
+}
+
+/* even - par | odd - impar */
