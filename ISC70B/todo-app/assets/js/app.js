@@ -2,42 +2,77 @@
 const userSelect = document.getElementById('select-users');
 const userContainer = document.getElementById('user-container');
 const taskContainer = document.getElementById('task-container');
+const tasksBtn = document.getElementById('show-tasks-btn');
 
-// Codígo nesesario para mostrar información
-
-// Fin de codígo 
-
-// Funciones
-/**
- * Obtiene una lista de todos los usuarios que pueden existir
- * @returns {Promise<User[]>}
- */
-function getAllUsers() {
-  return fetch('/data/usuarios.json')
-    .then(resp => resp.json());
+// Función que muestra información seleccionado 
+function UserInfo(user) {
+  userContainer.innerHTML = `
+    <h3>Información del usuario seleccionado</h3>
+    <ul>
+      <li>Nombre completo: ${user.firstname} ${user.lastname}</li>
+      <li>Email: ${user.email}</li>
+    </ul>
+  `;
 }
 
-/**
- * Obtiene una lista de todas las tareas que hay de todos los usuarios
- * @returns {Promise<Task[]>}
- */
-function getAllTasks() {
-  return fetch('/data/usuarios.json')
-    .then(resp => resp.json());
+// Función que muestra tareas de usuario selccionado 
+function TasksUser(tasksuser) {
+  taskContainer.innerHTML = `
+    <h3>Lista de tareas del usuario</h3>
+    <ul>
+      ${tasksuser.map(task => `
+        <li>
+          <span>${task.title}</span>
+          <input type="checkbox" ${task.completed ? 'checked' : ''}>
+        </li>  
+      `).join('')}
+    </ul>
+  `; 
 }
 
-/**
- * @typedef User Definición de un usuario
- * @property {number} id Identificador unico del usuario
- * @property {string} firtsname Primer nombre del usuario
- * @property {string} lastname Apellido del usuario
- * @property {string} email Correo electronico del usuario
-  */
+// Cargar el archivo JSON con información de usuarios 
+fetch('/data/usuarios.json')
+.then(resp => {
+  if (!resp.ok) {
+    throw new Error('No se cargo el archivo de usuarios'); 
+  }
+  return resp.json();
+})
+.then(usuarios => {
+  // Añade un Event Listener al elemento select para mostrar información de usuario seleccionado 
+  userSelect.addEventListener('change', function() {
+    // Obtiene ID usuario seleccionado 
+    const IDuser = parseInt(userSelect.value); 
 
-/**
- * @typedef Task Definición de una tarea de usuario
- * @property {number} id Identificador unico de la tarea
- * @property {number} userId IDentificador del uaurio a quien corresponde la tarea
- * @property {string} title Titulo de la tarea
- * @property {boolean} completed Estado de la tarea si esta completada o no
- */
+    // Encuentra usuario en el arreglo de usuarios 
+    const user = usuarios.find(user => user.id === IDuser); 
+
+    // Muestra información usuario seleccionado
+    UserInfo(user);
+  }); 
+
+  // Cargar el archivo JSON con información de tareas
+  return fetch('/data/tareas.json');
+})
+.then(resp => {
+  if (!resp.ok) {
+    throw new Error('No se cargo el archivo de tareas');
+  }
+  return resp.json();
+})
+.then(tareas => {
+  // Añadir un event listener al botón para mostrar las tareas del usuario seleccionado
+  tasksBtn.addEventListener('click', function() {
+    // Obtener el ID usuario seleccionado
+    const IDuser = parseInt(userSelect.value);
+
+    // Filtrar tareas para obtener solo las del usuario seleccionado
+    const tasksuser = tareas.filter(task => task.IDuser === IDuser);
+
+    // Mostrar tareas de usuario seleccionado
+    TasksUser(tasksuser);
+  });
+})
+.catch(error => {
+  console.error('Error al cargar los archivos JSON:', error);
+});

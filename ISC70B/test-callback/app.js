@@ -29,7 +29,6 @@ button.addEventListener('click', function() {
 
         for(let i = 0; i < json.usuarios.length; i++) {
             const li = document.createElement('li');
-
             li.innerText = json.usuarios[i].name;
 
             ul.appendChild(li);
@@ -41,7 +40,7 @@ button.addEventListener('click', function() {
 });
 
 function getUsers() {
-    fetch("http://127.0.0.1:5500/ISC70B/test-callback/info.json")
+    fetch("http://127.0.0.1:5000/ISC70B/test-callback/info.json")
     .then(function(response) {
         //console.log(response);
         return response.json();
